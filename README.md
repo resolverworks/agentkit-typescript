@@ -2,7 +2,7 @@
 
 # AgentKit
 
-Welcome to AgentKit! This toolkit provides a collection of scripts and a Next.js server to help you build an on-chain AI agent.
+Welcome to AgentKit! This toolkit provides a collection of scripts and a Next.js server to help you build an on-chain AI agent. You can see active agents at [AgentKit](https://agentkit.id).
 
 ## Getting Started
 
