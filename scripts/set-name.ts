@@ -2,10 +2,11 @@ import { Coinbase, Wallet } from "@coinbase/coinbase-sdk";
 import fetch from "node-fetch";
 import { hashMessage } from "viem";
 
-// FILL OUT THESE VARIABLES
-const AGENT_NAME = "my-agent-name";
-const AGENT_DESCRIPTION = "My agent description";
-const AGENT_WEBSITE = "https://google.com";
+const defaultAvatars = [
+  "https://imagedelivery.net/UJ5oN2ajUBrk2SVxlns2Aw/6d90b9ba-6d9f-4aed-121b-f1affc4bc300/public",
+  "https://imagedelivery.net/UJ5oN2ajUBrk2SVxlns2Aw/b58a5578-1289-4fb4-7bc8-6eca79058900/public",
+  "https://imagedelivery.net/UJ5oN2ajUBrk2SVxlns2Aw/7850881a-ff56-4826-0e5b-804f331d4500/public",
+];
 
 async function setWalletName() {
   try {
@@ -49,21 +50,29 @@ async function setWalletName() {
     console.log("Signature created successfully:", signature);
 
     console.log("Setting name...");
+    // Set Default Avatar if one is not provided
+    const avatarURL =
+      process.env.AVATAR_URL ||
+      defaultAvatars[Math.floor(Math.random() * defaultAvatars.length)];
+    const jsonPayload = {
+      address: process.env.WALLET_ADDRESS,
+      name: process.env.AGENT_NAME,
+      text_records: {
+        description: process.env.AGENT_DESCRIPTION,
+        url: process.env.AGENT_WEBSITE,
+        avatar: avatarURL,
+      },
+      signature: signature,
+    };
+    console.log(jsonPayload);
+
     // Submit name setting request to AgentKit
     const setNameResponse = await fetch("https://agentkit.id/api/set-name", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        address: process.env.WALLET_ADDRESS,
-        name: AGENT_NAME,
-        text_records: {
-          description: AGENT_DESCRIPTION,
-          url: AGENT_WEBSITE,
-        },
-        signature: signature,
-      }),
+      body: JSON.stringify(jsonPayload),
     });
 
     const result = await setNameResponse.json();

@@ -14,7 +14,9 @@ async function main() {
   });
 
   // Create wallet and get default address
-  const wallet = await Wallet.create();
+  const wallet = await Wallet.create({
+    networkId: Coinbase.networks.BaseMainnet,
+  });
   const address = await wallet.getDefaultAddress();
   const walletExport = wallet.export();
 

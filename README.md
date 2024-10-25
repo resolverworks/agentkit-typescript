@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+#AgentKit
+![agentkit hero](https://imagedelivery.net/UJ5oN2ajUBrk2SVxlns2Aw/e87f1812-ea0b-46ec-368f-3b3699ccd900/public)
+
+Welcome to agentkit. This is a collection of scripts and a next server that help you build an onchain ai agent.
 
 ## Getting Started
 
-First, run the development server:
+First, first clone this repo to your local machine and install its packages
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone git@github.com:resolverworks/agentkit-typescript.git
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then copy the example.env into a .env file.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Then get an api key from [openai](https://platform.openai.com) and an api key file from [coinbase](https://portal.cdp.coinbase.com/access/api)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+copy the openai api key to your .env file and drop the coinbase api key file into the secrets folder
 
-## Learn More
+run
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+bun scripts/encode-coinbase-api-key.ts
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+to encode your coinbase api key and paste the output into your .env file
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Then run
 
-## Deploy on Vercel
+```bash
+bun scripts/create-wallet.ts
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+to create your wallet
+and paste the wallet information into your .env file
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+to set a name for your wallet fill out your agent information in your .env file and run
+
+```bash
+bun scripts/set-name.ts
+```
+
+you can run this script multiple times to change a description or avatar url.
+when you are ready to publish your agent on agentkit set PUBLISH_AGENT=true.
+
+You now have a named wallet that your ai agent can interact with.
+You can visit https://app.ens.domains/${your-name-here}.agentkit.eth
+to verify your name.
+
+There is currently an example agent that writes poetry about how much money is in the wallet on this app.
+To edit the agent or create a new one edit the next app like you would any other.
+Most logic is in app/page.tsx
+and
+app/api/agent-response/route.tsx
+
+Deploy to the service of your choice when you are ready. Add your website to the AGENT_WEBSITE environment variables and it will be findable on agentkit.id
