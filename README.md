@@ -71,6 +71,7 @@ npm install
 ## Current Implementation
 
 The current setup includes an example agent that creates poetry based on the balance in your wallet. You can see a demo here:
+`https://agentkit-example.onrender.com/`
 
 ## Customization
 
