@@ -69,11 +69,11 @@ export async function GET(): Promise<
         },
         {
           role: "user",
-          content: `Write a short, creative poem about a crypto wallet containing these balances: ${balanceText}. The poem should be whimsical and fun, mentioning the specific amounts and currencies. You can ask users to fund the wallet or send a tip. Your name is ${process.env.AGENT_NAME}.agentkit.eth.`,
+          content: `Write a short (<200 words), creative poem about a crypto wallet containing these balances: ${balanceText}. The poem should be whimsical and fun, mentioning the specific amounts and currencies.  You can ask users to fund the wallet or send a tip. Your name is ${process.env.AGENT_NAME}.agentkit.eth.`,
         },
       ],
       model: "gpt-4o-mini",
-      max_tokens: 200,
+      max_tokens: 300,
       temperature: 0.7,
     });
 
