@@ -31,58 +31,59 @@ npm install
 
 2. **Get API Keys**
 
-   - [OpenAI](https://platform.openai.com): Generate an API key and add it to your `.env` file.
-   - [Coinbase](https://portal.cdp.coinbase.com/access/api): Obtain an API key file and place it in the `secrets` folder.
+   - [OpenAI](https://platform.openai.com): Generate an API key and add it to your `.env` file
+   - [Coinbase](https://portal.cdp.coinbase.com/access/api): Obtain an API key file and place it in the `secrets` folder
 
-3. **Encode your Coinbase API Key**
+3. **Configure Coinbase**
 
-   - Run the encoding script to transform the key:
+   - Run the encoding script:
      ```bash
      bun scripts/encode-coinbase-api-key.ts
      ```
-   - Copy the output to your `.env` file.
+   - Copy the output to your `.env` file
 
-4. **Create a Wallet**
+4. **Set Up Wallet**
 
-   - Generate your wallet information:
+   - Generate wallet information:
      ```bash
      bun scripts/create-wallet.ts
      ```
-   - Paste the wallet details into your `.env` file.
+   - Add the wallet details to your `.env` file
 
-5. **Set Up Your Agent**
-
-   - Complete the agent details in your `.env` file.
-   - Assign a name to your wallet by running:
+5. **Configure Agent**
+   - Fill in agent details in `.env` file
+   - Set your agent's name:
      ```bash
      bun scripts/set-name.ts
      ```
-   - This script can be rerun to update the description or avatar URL.
+   - You can rerun this script anytime to update description or avatar URL
 
-6. **Publishing Your Agent**
-   - When ready to publish, set `PUBLISH_AGENT="true"` in your `.env` file and rerun:
+### Development
+
+The example agent creates poetry based on wallet balance. See it in action at:
+[https://agentkit-example.onrender.com/](https://agentkit-example.onrender.com/)
+
+To create your own agent, modify these Next.js files:
+
+- `app/page.tsx` - Frontend interface
+- `app/api/agent-response/route.tsx` - Agent logic
+
+### Deployment
+
+1. Deploy to your preferred hosting service
+
+2. Configure public settings:
+
+   - Set `PUBLISH_AGENT="true"` in `.env`
+   - Add your deployment URL to `AGENT_WEBSITE` in `.env`
+   - Run:
      ```bash
      bun scripts/set-name.ts
      ```
-   - Verify your agent name on ENS:
+
+3. Verify your setup:
+   - Check your ENS name:
      ```
      https://app.ens.domains/${your-name-here}.agentkit.eth
      ```
-
-## Current Implementation
-
-The current setup includes an example agent that creates poetry based on the balance in your wallet. You can see a demo here:
-`https://agentkit-example.onrender.com/`
-
-## Customization
-
-To modify or create a new agent, update the Next.js app as you would for any other Next.js project. Key files include:
-
-- `app/page.tsx`
-- `app/api/agent-response/route.tsx`
-
-## Deployment
-
-1. Deploy to your preferred hosting service.
-2. Add your site URL to the `AGENT_WEBSITE` variable in your `.env` file and rerun ` bun scripts/set-name.ts`
-3. Your agent will be findable on [AgentKit](https://agentkit.id).
+   - Find your agent on [AgentKit](https://agentkit.id)
