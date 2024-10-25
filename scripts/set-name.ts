@@ -75,6 +75,10 @@ async function setWalletName() {
       },
       body: JSON.stringify(jsonPayload),
     });
+    if (!setNameResponse.ok) {
+      const result = await setNameResponse.json();
+      throw new Error(result.error);
+    }
 
     const result = await setNameResponse.json();
     console.log("Name set successfully:", result);
