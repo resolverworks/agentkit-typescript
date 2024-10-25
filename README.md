@@ -59,7 +59,7 @@ npm install
    - This script can be rerun to update the description or avatar URL.
 
 6. **Publishing Your Agent**
-   - When ready to publish, set `PUBLISH_AGENT=true` in your `.env` file and rerun:
+   - When ready to publish, set `PUBLISH_AGENT="true"` in your `.env` file and rerun:
      ```bash
      bun scripts/set-name.ts
      ```
