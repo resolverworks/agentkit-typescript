@@ -1,7 +1,8 @@
+![agentkit hero](https://imagedelivery.net/UJ5oN2ajUBrk2SVxlns2Aw/e87f1812-ea0b-46ec-368f-3b3699ccd900/public)
+
 # AgentKit
 
 Welcome to AgentKit! This toolkit provides a collection of scripts and a Next.js server to help you build an on-chain AI agent.
-![agentkit hero](https://imagedelivery.net/UJ5oN2ajUBrk2SVxlns2Aw/e87f1812-ea0b-46ec-368f-3b3699ccd900/public)
 
 ## Getting Started
 
