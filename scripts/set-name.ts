@@ -61,6 +61,7 @@ async function setWalletName() {
         description: process.env.AGENT_DESCRIPTION,
         url: process.env.AGENT_WEBSITE,
         avatar: avatarURL,
+        publish: process.env.AGENT_PUBLISH,
       },
       signature: signature,
     };

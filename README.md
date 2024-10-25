@@ -82,5 +82,5 @@ To modify or create a new agent, update the Next.js app as you would for any oth
 ## Deployment
 
 1. Deploy to your preferred hosting service.
-2. Add your site URL to the `AGENT_WEBSITE` variable in your `.env` file.
+2. Add your site URL to the `AGENT_WEBSITE` variable in your `.env` file and rerun ` bun scripts/set-name.ts`
 3. Your agent will be findable on [AgentKit](https://agentkit.id).
