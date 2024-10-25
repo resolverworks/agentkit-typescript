@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Coinbase, Wallet } from "@coinbase/waas-sdk-web";
+import { Coinbase, Wallet } from "@coinbase/coinbase-sdk";
 import OpenAI from "openai";
 
 interface WalletBalance {
@@ -10,7 +10,9 @@ interface WalletBalance {
 
 interface ApiResponse {
   poem: string;
-  balances: WalletBalance[];
+  walletAddress: string;
+  walletName: string;
+  network: string;
 }
 
 interface CoinbaseCredentials {
@@ -47,12 +49,15 @@ export async function GET(): Promise<
     });
 
     // Get wallet balances
-    const balances: WalletBalance[] = await wallet.list_balances();
+    const balances = await wallet.listBalances();
 
     // Format balances for the poem
-    const balanceText: string = balances
-      .map((b: WalletBalance) => `${b.amount} ${b.currency}`)
-      .join(", ");
+    let balanceText: string = balances.toString().replace("BalanceMap", "");
+    if (balanceText === "{}") {
+      balanceText = "no funds";
+    }
+
+    console.log("Wallet balances:", balanceText);
 
     // Generate poem using OpenAI
     const completion = await openai.chat.completions.create({
@@ -64,7 +69,7 @@ export async function GET(): Promise<
         },
         {
           role: "user",
-          content: `Write a short, creative poem about a crypto wallet containing these balances: ${balanceText}. The poem should be whimsical and fun, mentioning the specific amounts and currencies. You can ask users to fund the wallet or send a tip at ${process.env.AGENT_NAME} on ${process.env.WALLET_NETWORK}.`,
+          content: `Write a short, creative poem about a crypto wallet containing these balances: ${balanceText}. The poem should be whimsical and fun, mentioning the specific amounts and currencies. You can ask users to fund the wallet or send a tip. Your name is ${process.env.AGENT_NAME}.agentkit.eth.`,
         },
       ],
       model: "gpt-4o-mini",
@@ -75,7 +80,12 @@ export async function GET(): Promise<
     const poem: string = completion.choices[0].message.content || "";
 
     return NextResponse.json(
-      { poem, balances },
+      {
+        poem,
+        walletAddress: process.env.WALLET_ADDRESS as string,
+        walletName: (process.env.AGENT_NAME as string) + ".agentkit.eth",
+        network: process.env.WALLET_NETWORK as string,
+      },
       {
         status: 200,
       }

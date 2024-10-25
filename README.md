@@ -1,57 +1,86 @@
-#AgentKit
-![agentkit hero](https://imagedelivery.net/UJ5oN2ajUBrk2SVxlns2Aw/e87f1812-ea0b-46ec-368f-3b3699ccd900/public)
+# AgentKit
 
-Welcome to agentkit. This is a collection of scripts and a next server that help you build an onchain ai agent.
+Welcome to AgentKit! This toolkit provides a collection of scripts and a Next.js server to help you build an on-chain AI agent.
+![agentkit hero](https://imagedelivery.net/UJ5oN2ajUBrk2SVxlns2Aw/e87f1812-ea0b-46ec-368f-3b3699ccd900/public)
 
 ## Getting Started
 
-First, first clone this repo to your local machine and install its packages
+### Installation
+
+1. Clone this repository to your local machine:
 
 ```bash
 git clone git@github.com:resolverworks/agentkit-typescript.git
+```
+
+2. Install dependencies:
+
+```bash
 npm install
 ```
 
-Then copy the example.env into a .env file.
+### Setup
 
-Then get an api key from [openai](https://platform.openai.com) and an api key file from [coinbase](https://portal.cdp.coinbase.com/access/api)
+1. **Environment Setup**
 
-copy the openai api key to your .env file and drop the coinbase api key file into the secrets folder
+   - Copy `example.env` to a new `.env` file:
+     ```bash
+     cp example.env .env
+     ```
 
-run
+2. **Get API Keys**
 
-```bash
-bun scripts/encode-coinbase-api-key.ts
-```
+   - [OpenAI](https://platform.openai.com): Generate an API key and add it to your `.env` file.
+   - [Coinbase](https://portal.cdp.coinbase.com/access/api): Obtain an API key file and place it in the `secrets` folder.
 
-to encode your coinbase api key and paste the output into your .env file
+3. **Encode your Coinbase API Key**
 
-Then run
+   - Run the encoding script to transform the key:
+     ```bash
+     bun scripts/encode-coinbase-api-key.ts
+     ```
+   - Copy the output to your `.env` file.
 
-```bash
-bun scripts/create-wallet.ts
-```
+4. **Create a Wallet**
 
-to create your wallet
-and paste the wallet information into your .env file
+   - Generate your wallet information:
+     ```bash
+     bun scripts/create-wallet.ts
+     ```
+   - Paste the wallet details into your `.env` file.
 
-to set a name for your wallet fill out your agent information in your .env file and run
+5. **Set Up Your Agent**
 
-```bash
-bun scripts/set-name.ts
-```
+   - Complete the agent details in your `.env` file.
+   - Assign a name to your wallet by running:
+     ```bash
+     bun scripts/set-name.ts
+     ```
+   - This script can be rerun to update the description or avatar URL.
 
-you can run this script multiple times to change a description or avatar url.
-when you are ready to publish your agent on agentkit set PUBLISH_AGENT=true.
+6. **Publishing Your Agent**
+   - When ready to publish, set `PUBLISH_AGENT=true` in your `.env` file and rerun:
+     ```bash
+     bun scripts/set-name.ts
+     ```
+   - Verify your agent name on ENS:
+     ```
+     https://app.ens.domains/${your-name-here}.agentkit.eth
+     ```
 
-You now have a named wallet that your ai agent can interact with.
-You can visit https://app.ens.domains/${your-name-here}.agentkit.eth
-to verify your name.
+## Current Implementation
 
-There is currently an example agent that writes poetry about how much money is in the wallet on this app.
-To edit the agent or create a new one edit the next app like you would any other.
-Most logic is in app/page.tsx
-and
-app/api/agent-response/route.tsx
+The current setup includes an example agent that creates poetry based on the balance in your wallet. You can see a demo here:
 
-Deploy to the service of your choice when you are ready. Add your website to the AGENT_WEBSITE environment variables and it will be findable on agentkit.id
+## Customization
+
+To modify or create a new agent, update the Next.js app as you would for any other Next.js project. Key files include:
+
+- `app/page.tsx`
+- `app/api/agent-response/route.tsx`
+
+## Deployment
+
+1. Deploy to your preferred hosting service.
+2. Add your site URL to the `AGENT_WEBSITE` variable in your `.env` file.
+3. Your agent will be findable on [AgentKit](https://agentkit.id).
